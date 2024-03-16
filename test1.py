@@ -17,35 +17,35 @@ LCD_ROWS = 2
 
 lcd = LCD.Adafruit_CharLCD(LCD_RS, LCD_EN, LCD_D4, LCD_D5, LCD_D6, LCD_D7, LCD_COLS, LCD_ROWS)
 
-def read_dht_sensor()
+def read_dht_sensor():
     humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
     return humidity, temperature
 
-def read_light_status()
+def read_light_status():
     # Placeholder function to simulate reading LDR
     # Replace this with your actual LDR reading code
-    return Light Detected if True else No Light
+    return "Light Detected" if True else "No Light"
 
-try
-    while True
+try:
+    while True:
         humidity, temperature = read_dht_sensor()
         light_status = read_light_status()
 
         # Display results on the console
-        print(fTemperature {temperature.2f}°C, Humidity {humidity.2f}%)
-        print(fLight Status {light_status})
+        print(f"Temperature: {temperature:.2f}°C, Humidity: {humidity:.2f}%")
+        print(f"Light Status: {light_status}")
 
         # Display results on the LCD
         lcd.clear()
-        lcd.message(fTemp {temperature.1f}CnHumidity {humidity.1f}%n{light_status})
+        lcd.message(f"Temp: {temperature:.1f}C\nHumidity: {humidity:.1f}%\n{light_status}")
         
         time.sleep(2)  # Wait for 2 seconds before updating readings
 
-except KeyboardInterrupt
-    print(Exiting...)
+except KeyboardInterrupt:
+    print("Exiting...")
 
-finally
+finally:
     lcd.clear()
-    lcd.message(Goodbye!)
+    lcd.message("Goodbye!")
     time.sleep(2)
     lcd.clear()
